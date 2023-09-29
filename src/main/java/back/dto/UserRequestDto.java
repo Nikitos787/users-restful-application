@@ -26,7 +26,6 @@ public class UserRequestDto {
     @NotBlank(message = "phone number can't be empty or null")
     @ValidPhoneNumber
     private String phoneNumber;
-    @NotBlank(message = "birth date can't be empty or null")
     @Past(message = "birth date must be early than current day")
     @ValidAge
     private LocalDate birthdate;
