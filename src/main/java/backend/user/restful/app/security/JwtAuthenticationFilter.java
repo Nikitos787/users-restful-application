@@ -1,6 +1,9 @@
 package backend.user.restful.app.security;
 
-import backend.user.restful.app.lib.Constant;
+import static backend.user.restful.app.lib.Constant.AUTHORIZATION_HEADER;
+import static backend.user.restful.app.lib.Constant.BEARER_TYPE;
+import static backend.user.restful.app.lib.Constant.HEAD;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,14 +30,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain)
             throws ServletException, IOException {
-        final String authHeader = request.getHeader(Constant.AUTHORIZATION_HEADER);
+        final String authHeader = request.getHeader(AUTHORIZATION_HEADER);
         String jwt;
         final String userEmail;
-        if (authHeader == null || !authHeader.startsWith(Constant.BEARER_TYPE)) {
+        if (authHeader == null || !authHeader.startsWith(BEARER_TYPE)) {
             filterChain.doFilter(request, response);
             return;
         }
-        jwt = authHeader.substring(Constant.HEAD);
+        jwt = authHeader.substring(HEAD);
         userEmail = jwtService.extractUserEmail(jwt);
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);

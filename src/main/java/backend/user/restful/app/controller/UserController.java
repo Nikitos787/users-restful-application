@@ -1,11 +1,13 @@
 package backend.user.restful.app.controller;
 
+import static backend.user.restful.app.lib.Constant.ADMIN;
+import static backend.user.restful.app.lib.Constant.USER;
+
 import backend.user.restful.app.dto.BirthDateBetweenSearchParametersDto;
 import backend.user.restful.app.dto.UserRequestDto;
 import backend.user.restful.app.dto.UserResponseDto;
 import backend.user.restful.app.dto.UserSearchParametersDto;
 import backend.user.restful.app.exception.RegistrationException;
-import backend.user.restful.app.lib.Constant;
 import backend.user.restful.app.model.User;
 import backend.user.restful.app.service.UserService;
 import com.github.fge.jsonpatch.JsonPatch;
@@ -41,14 +43,14 @@ public class UserController {
     @GetMapping
     @Operation(summary = "Get all users from db.",
             description = "You can use pagination and sorting")
-    @Secured({Constant.ADMIN, Constant.USER})
+    @Secured({ADMIN, USER})
     public List<UserResponseDto> findAll(Pageable pageable) {
         return userService.findAll(pageable);
     }
 
     @GetMapping("/search")
     @Operation(summary = "Get users by parameters")
-    @Secured({Constant.ADMIN, Constant.USER})
+    @Secured({ADMIN, USER})
     public List<UserResponseDto> searchUsers(
             @Parameter(schema = @Schema(
                     implementation = UserSearchParametersDto.class)
@@ -59,7 +61,7 @@ public class UserController {
 
     @GetMapping("/search-by-date-between")
     @Operation(summary = "Get users by date between")
-    @Secured({Constant.ADMIN, Constant.USER})
+    @Secured({ADMIN, USER})
     public List<UserResponseDto> searchByDate(
             @Parameter(schema = @Schema(
                     implementation = BirthDateBetweenSearchParametersDto.class)
@@ -71,7 +73,7 @@ public class UserController {
     @GetMapping("/{id}")
     @Operation(summary = "Get user by id from db.",
             description = "Only for admin")
-    @Secured(Constant.ADMIN)
+    @Secured(ADMIN)
     public UserResponseDto findById(@PathVariable
                                     @Parameter(description = "User id") Long id) {
         return userService.findById(id);
@@ -79,7 +81,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update all user info")
-    @Secured({Constant.ADMIN, Constant.USER})
+    @Secured({ADMIN, USER})
     public UserResponseDto updateAllInfo(@PathVariable
                                          @Parameter(description = "User id") Long id,
                                          @RequestBody
@@ -96,7 +98,7 @@ public class UserController {
 
     @PatchMapping(path = "/{id}", consumes = "application/json-patch+json")
     @Operation(summary = "Update some user info")
-    @Secured({Constant.ADMIN, Constant.USER})
+    @Secured({ADMIN, USER})
     public UserResponseDto patch(@PathVariable Long id,
                                  @Parameter(description = "User id")
                                  @RequestBody JsonPatch patchDocument,
@@ -108,7 +110,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete user by id. Note: Here implemented safe delete")
-    @Secured(Constant.ADMIN)
+    @Secured(ADMIN)
     public void delete(@PathVariable
                        @Parameter(description = "User id") Long id) {
         userService.delete(id);

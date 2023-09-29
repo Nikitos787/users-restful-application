@@ -1,7 +1,13 @@
 package backend.user.restful.app.repository.user;
 
+import static backend.user.restful.app.lib.Constant.ADDRESS_FIELD;
+import static backend.user.restful.app.lib.Constant.BIRTHDATE_FIELD;
+import static backend.user.restful.app.lib.Constant.EMAIL_FIELD;
+import static backend.user.restful.app.lib.Constant.FIRST_NAME_FIELD;
+import static backend.user.restful.app.lib.Constant.LAST_NAME_FIELD;
+import static backend.user.restful.app.lib.Constant.PHONE_NUMBER_FIELD;
+
 import backend.user.restful.app.dto.UserSearchParametersDto;
-import backend.user.restful.app.lib.Constant;
 import backend.user.restful.app.model.User;
 import backend.user.restful.app.repository.SpecificationBuilder;
 import backend.user.restful.app.repository.SpecificationProviderManager;
@@ -22,31 +28,31 @@ public class UserSpecificationBuilder implements SpecificationBuilder<User> {
         if (searchParametersDto.getFirstNames() != null
                 && searchParametersDto.getFirstNames().length > 0) {
             specification = specification.and(specificationProviderManager
-                    .getSpecificationProvider(Constant.FIRST_NAME_FIELD)
+                    .getSpecificationProvider(FIRST_NAME_FIELD)
                     .getSpecification(searchParametersDto.getFirstNames()));
         }
         if (searchParametersDto.getLastNames() != null
                 && searchParametersDto.getLastNames().length > 0) {
             specification = specification.and(specificationProviderManager
-                    .getSpecificationProvider(Constant.LAST_NAME_FIELD)
+                    .getSpecificationProvider(LAST_NAME_FIELD)
                     .getSpecification(searchParametersDto.getLastNames()));
         }
         if (searchParametersDto.getAddresses() != null
                 && searchParametersDto.getAddresses().length > 0) {
             specification = specification.and(specificationProviderManager
-                    .getSpecificationProvider(Constant.ADDRESS_FIELD)
+                    .getSpecificationProvider(ADDRESS_FIELD)
                     .getSpecification(searchParametersDto.getAddresses()));
         }
         if (searchParametersDto.getEmails() != null
                 && searchParametersDto.getEmails().length > 0) {
             specification = specification.and(specificationProviderManager
-                    .getSpecificationProvider(Constant.EMAIL_FIELD)
+                    .getSpecificationProvider(EMAIL_FIELD)
                     .getSpecification(searchParametersDto.getEmails()));
         }
         if (searchParametersDto.getBirthdates() != null
                 && searchParametersDto.getBirthdates().length > 0) {
             specification = specification.and(specificationProviderManager
-                    .getSpecificationProvider(Constant.BIRTHDATE_FIELD)
+                    .getSpecificationProvider(BIRTHDATE_FIELD)
                     .getSpecification(
                             Arrays.stream(searchParametersDto.getBirthdates())
                                     .map(LocalDate::toString)
@@ -56,7 +62,7 @@ public class UserSpecificationBuilder implements SpecificationBuilder<User> {
         if (searchParametersDto.getPhoneNumbers() != null
                 && searchParametersDto.getPhoneNumbers().length > 0) {
             specification = specification.and(specificationProviderManager
-                    .getSpecificationProvider(Constant.PHONE_NUMBER_FIELD)
+                    .getSpecificationProvider(PHONE_NUMBER_FIELD)
                     .getSpecification(searchParametersDto.getPhoneNumbers()));
         }
         return specification;
