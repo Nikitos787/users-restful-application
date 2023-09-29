@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-users-to-db
+      author: nikitos
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: 'admin@gmail.com'
+              - column:
+                  name: password
+                  value: '$2a$10$EsEWG4GkVffgPQw5AADUc.mes/cDkRks0TnNNc8N19gyn3bydKB3y'
+              - column:
+                  name: first_name
+                  value: 'Bob'
+              - column:
+                  name: last_name
+                  value: 'Bobson'
+              - column:
+                  name: birth_date
+                  value: "1996-11-04"
+              - column:
+                  name: address
+                  value: "Antonovycha 122"
+              - column:
+                  name: phone_number
+                  value: "380987876652"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: 'user@gmail.com'
+              - column:
+                  name: password
+                  value: '$2a$10$pnyqYjIJXzVu5eAF6wHTxe4gGdDbxW/D2XijSXAf9lGjIWvkEXZH.'
+              - column:
+                  name: first_name
+                  value: 'Alice'
+              - column:
+                  name: last_name
+                  value: 'Alison'
+              - column:
+                  name: birth_date
+                  value: "1995-12-04"
+              - column:
+                  name: address
+                  value: "Antonovycha 120"
+              - column:
+                  name: phone_number
+                  value: "380987876002"
