@@ -20,7 +20,7 @@ services:
       mysqldb:
         condition: service_healthy
     restart: on-failure
-    image: book_store_app
+    image: users_project_app
     build: .
     env_file: ./.env
     ports:
@@ -35,8 +35,8 @@ services:
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQLDialect",
         "spring.jpa.hibernate.ddl-auto" : "validate",
         "jwt.secret" : "$JWT_SECRET",
-        "age.for.registration" : "$AGE.FOR.REGISTRATION",
-        "prefix.for.phone.number" : "$PREFIX.FOR.NUMBER",
+        "age.for.registration" : "$AGE_FOR_REGISTRATION",
+        "prefix.for.phone.number" : "$PREFIX_FOR_NUMBER",
         "jwt.expiration" : "$EXPIRATION_TIME"
       }'
       JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
