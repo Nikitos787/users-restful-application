@@ -41,6 +41,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
+    @Operation(summary = "Get all users from db.",
+            description = "You can use pagination and sorting")
     @Secured(USER)
     public List<UserResponseDto> findAll(Pageable pageable) {
         return userService.findAll(pageable);
@@ -69,16 +71,25 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get user by id from db.",
+            description = "Only for admin")
     @Secured(ADMIN)
-    public UserResponseDto findById(@PathVariable Long id) {
+    public UserResponseDto findById(@PathVariable
+                                    @Parameter(description = "User id") Long id) {
         return userService.findById(id);
     }
 
-    @Operation(summary = "Update all user info")
     @PutMapping("/{id}")
+    @Operation(summary = "Update all user info")
     @Secured(USER)
-    public UserResponseDto updateAllInfo(@PathVariable Long id,
-                                         @RequestBody UserRequestDto userRequestDto,
+    public UserResponseDto updateAllInfo(@PathVariable
+                                         @Parameter(description = "User id") Long id,
+                                         @RequestBody
+                                         @Valid
+                                         @Parameter(schema = @Schema(
+                                                 implementation =
+                                                         BirthDateBetweenSearchParametersDto.class)
+                                         ) UserRequestDto userRequestDto,
                                          Authentication authentication)
             throws RegistrationException {
         UserDetails principal = (UserDetails) authentication.getPrincipal();
@@ -86,10 +97,11 @@ public class UserController {
         return userService.updateInfo(id, authenticatedUser, userRequestDto);
     }
 
-    @Operation(summary = "Update some user info")
     @PatchMapping(path = "/{id}", consumes = "application/json-patch+json")
+    @Operation(summary = "Update some user info")
     @Secured(USER)
     public UserResponseDto patch(@PathVariable Long id,
+                                 @Parameter(description = "User id")
                                  @RequestBody JsonPatch patchDocument,
                                  Authentication authentication)
             throws JsonPatchException, IOException, RegistrationException {
@@ -98,10 +110,11 @@ public class UserController {
         return userService.patch(id, authenticatedUser, patchDocument);
     }
 
-    @Operation(summary = "Delete user by id. Note: Here impleneted safe delete")
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete user by id. Note: Here impleneted safe delete")
     @Secured(ADMIN)
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable
+                       @Parameter(description = "User id") Long id) {
         userService.delete(id);
     }
 }
