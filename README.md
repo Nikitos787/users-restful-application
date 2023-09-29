@@ -9,10 +9,9 @@
     - [Functionality](#functionality)
     - [Unit Tests and Error Handling](#unit-tests-and-error-handling)
     - [Technology Stack](#technology-stack)
-- [Project Structure](#green_book-project-structure)
-- [Getting Started](#rocket-getting-started)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
 - [API Endpoints](#api-endpoints)
-- [Customization](#wrench-customization)
 
 
 ## :hammer: Implementation Details
@@ -66,7 +65,7 @@ The codebase is thoroughly covered by unit tests using the Spring testing framew
 - MockMvc
 - Testcontainers
 
-## :green_book: Project Structure
+## Project Structure
 
 > The project has a Three-Tier Architecture:
 
@@ -88,7 +87,7 @@ To get started with the test task solution, follow the instructions below:
 * run Docker (for test containers)
 * Build the project: `mvn clean package`.
 * Run the application.
-* Use this postman [collection](https://www.postman.com/supply-observer-16858482/workspace/for-people/collection/27238121-54ceab24-1d1e-4ea6-a879-3a1a5fb524db?action=share&creator=27238121) or swagger
+* Use this postman [collection](https://www.postman.com/supply-observer-16858482/workspace/for-people/collection/27238121-54ceab24-1d1e-4ea6-a879-3a1a5fb524db?action=share&creator=27238121) or [swagger](http://localhost:8080/swagger-ui.html)
 
 ### Run with docker
 
@@ -103,7 +102,7 @@ To get started with the test task solution, follow the instructions below:
 
 > Make sure to configure the necessary properties in `application.properties` for tests.
 
-> User can register/login/update own info, search other users. But only Admin can find user by id or delete user
+> User can register/login/update own info, search other users. But only Admin can also find user by id or delete user
 
 ## API Endpoints
 
@@ -121,6 +120,6 @@ Here are some example API endpoints to get you started:
 
 All API responses are in JSON format.
 
-## :wrench: GOOD LUCK
+## GOOD LUCK
 
 Good luck with your assignment! If you have any questions, feel free to reach out.
