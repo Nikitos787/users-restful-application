@@ -1,5 +1,8 @@
 package backend.user.restful.app.lib;
 
+import static backend.user.restful.app.lib.Constant.FIRST_SYMBOLS;
+import static backend.user.restful.app.lib.Constant.PHONE_NUMBER_PATTERN;
+
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import java.util.regex.Matcher;
@@ -22,8 +25,7 @@ public class PhoneNumberValidator implements ConstraintValidator<ValidPhoneNumbe
         if (phoneNumber == null) {
             return false;
         }
-        String exampleForPattern = Constant.FIRST_SYMBOLS + prefixPhone
-                + Constant.PHONE_NUMBER_PATTERN;
+        String exampleForPattern = FIRST_SYMBOLS + prefixPhone + PHONE_NUMBER_PATTERN;
         Pattern pattern = Pattern.compile(exampleForPattern);
         Matcher matcher = pattern.matcher(phoneNumber);
         return matcher.matches();

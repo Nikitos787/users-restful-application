@@ -1,6 +1,8 @@
 package backend.user.restful.app.repository.user.specification;
 
-import backend.user.restful.app.lib.Constant;
+import static backend.user.restful.app.lib.Constant.EMAIL_FIELD;
+import static backend.user.restful.app.lib.Constant.ROLES_TABLE;
+
 import backend.user.restful.app.model.User;
 import backend.user.restful.app.repository.SpecificationProvider;
 import java.util.Arrays;
@@ -12,13 +14,13 @@ public class EmailSpecificationProvider implements SpecificationProvider<User> {
     @Override
     public Specification<User> getSpecification(String[] params) {
         return (root, query, criteriaBuilder) -> {
-            root.fetch(Constant.ROLES_TABLE);
-            return root.get(Constant.EMAIL_FIELD).in(Arrays.stream(params).toArray());
+            root.fetch(ROLES_TABLE);
+            return root.get(EMAIL_FIELD).in(Arrays.stream(params).toArray());
         };
     }
 
     @Override
     public String getKey() {
-        return Constant.EMAIL_FIELD;
+        return EMAIL_FIELD;
     }
 }
